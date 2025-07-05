@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chrome Hearts - Collections</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif; /* Default font for body */
+            background-color: #1a1a1a;
+            color: #e0e0e0;
+            position: relative;
+            z-index: 1;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://wallpapers.com/images/hd/chrome-hearts-club-be0b195uxic2r0b4.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            filter: blur(2px);
+            z-index: -1;
+            opacity: 0.7;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #333;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #666;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #888;
+        }
+        .chrome-hearts-text {
+            color: #c0c0c0;
+            font-family: 'UnifrakturCook', cursive; /* Apply UnifrakturCook to main headings */
+        }
+        .chrome-hearts-accent {
+            color: #a0a0a0;
+        }
+        .chrome-hearts-bg-dark {
+            background-color: rgba(42, 42, 42, 0.85);
+        }
+        .chrome-hearts-border {
+            border-color: #555;
+        }
+        .chrome-hearts-button {
+            background-color: #4a4a4a;
+            color: #e0e0e0;
+            border: 1px solid #666;
+        }
+        .chrome-hearts-button:hover {
+            background-color: #5a5a5a;
+            border-color: #888;
+        }
+        /* New CSS for fade-in animation */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <nav class="bg-black shadow-lg py-4 px-6 md:px-10 sticky top-0 z-40">
+        <div class="container mx-auto flex justify-between items-center">
+            <!-- Left aligned logo -->
+            <a href="index.html" class="hover:opacity-80 transition duration-300">
+                <img src="https://www.shutterstock.com/image-vector/chrome-hearts-luxury-brand-renowned-600nw-2482182603.jpg" alt="Chrome Hearts Logo" class="h-8 w-auto">
+            </a>
+
+            <!-- Centered Emblem -->
+            <div class="absolute left-1/2 transform -translate-x-1/2">
+                <a href="index.html" class="hover:opacity-80 transition duration-300">
+                    <img src="https://1000logos.net/wp-content/uploads/2024/12/Chrome-Hearts-Emblem.png" alt="Chrome Hearts Emblem Logo" class="h-8 w-auto">
+                </a>
+            </div>
+
+            <div class="flex space-x-6 items-center ml-auto">
+                <a href="index.html" class="text-gray-400 hover:text-white px-3 py-2 rounded-lg text-lg font-medium transition duration-300">Home</a>
+                <a href="about.html" class="text-gray-400 hover:text-white px-3 py-2 rounded-lg text-lg font-medium transition duration-300">About</a>
+                <a href="services.html" class="text-gray-400 hover:text-white px-3 py-2 rounded-lg text-lg font-medium transition duration-300">Collections</a>
+                <button onclick="logout()" class="ml-4 bg-red-700 hover:bg-red-800 text-white font-bold py-2 px-4 rounded-full shadow-md transition duration-300">
+                    Logout
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main id="page-content" class="flex-1 p-6 md:p-10">
+        <section class="chrome-hearts-bg-dark rounded-xl shadow-lg p-8 mb-8 border chrome-hearts-border fade-in-section">
+            <h2 class="text-4xl font-extrabold chrome-hearts-text mb-8 text-center">Our Exclusive Collections</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="product-list">
+                <div class="chrome-hearts-bg-dark rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 hover:scale-105 hover:shadow-xl border chrome-hearts-border flex flex-col items-center">
+                    <h3 class="text-2xl font-semibold chrome-hearts-text mb-3">Sterling Silver Jewelry</h3>
+                    <p class="text-gray-400">Iconic rings, pendants, bracelets, and chains, meticulously crafted from the finest sterling silver with signature motifs.</p>
+                    <img src="https://i.pinimg.com/736x/c3/19/18/c319188e9fe6d5df601ab8aaab1592a9.jpg" alt="Chrome Hearts Silver Jewelry" class="w-full h-64 object-cover mt-4 rounded-md">
+                    <div class="p-6">
+                        <button onclick="showProductDetail('silver-jewelry')" class="chrome-hearts-text hover:text-white font-medium flex items-center">
+                            View Collection
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="chrome-hearts-bg-dark rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 hover:scale-105 hover:shadow-xl border chrome-hearts-border flex flex-col items-center">
+                    <h3 class="text-2xl font-semibold chrome-hearts-text mb-3">Apparel & Leather Goods</h3>
+                    <p class="text-gray-400">Exclusive range of t-shirts, hoodies, jackets, and premium leather accessories, embodying rebellious luxury.</p>
+                    <img src="https://image-cdn.hypb.st/https%3A%2F%2Fhypebeast.com%2Fimage%2F2017%2F01%2Fchrome-hearts-x-dover-street-market-ginza-2017-collection-13.jpg?q=75&w=800&cbr=1&fit=max" alt="Apparel & Leather" class="w-full h-64 object-cover mt-4 rounded-md">
+                    <div class="p-6">
+                        <button onclick="showProductDetail('apparel-leather')" class="chrome-hearts-text hover:text-white font-medium flex items-center">
+                            View Collection
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="chrome-hearts-bg-dark rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 hover:scale-105 hover:shadow-xl border chrome-hearts-border flex flex-col items-center">
+                    <h3 class="text-2xl font-semibold chrome-hearts-text mb-3">Eyewear & Lifestyle</h3>
+                    <p class="text-gray-400">Distinctive eyewear, home goods, and unique accessories, each a testament to our design philosophy.</p>
+                    <img src="https://i.ytimg.com/vi/AVVK6B-uF64/maxresdefault.jpg" alt="Eyewear & Accessories" class="w-full h-64 object-cover mt-4 rounded-md">
+                    <div class="p-6">
+                        <button onclick="showProductDetail('eyewear-lifestyle')" class="chrome-hearts-text hover:text-white font-medium flex items-center">
+                            View Collection
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="bg-black text-white py-6 mt-auto">
+            <div class="container mx-auto text-center text-sm chrome-hearts-text">
+                &copy; 2025 Chrome Hearts. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const pageContent = document.getElementById('page-content');
+        const productListContainer = document.getElementById('product-list');
+
+        const productDetails = {
+            'silver-jewelry': `
+                <section class="chrome-hearts-bg-dark rounded-xl shadow-lg p-8 mb-8 border chrome-hearts-border fade-in-section">
+                    <h2 class="text-4xl font-extrabold chrome-hearts-text mb-6 text-center">Sterling Silver Jewelry</h2>
+                    <p class="text-gray-400 text-lg mb-4">
+                        Our sterling silver jewelry is the cornerstone of Chrome Hearts, renowned for its intricate detailing and signature motifs like crosses, fleurs-de-lis, and daggers. Each piece is hand-finished, ensuring a unique character and exceptional quality.
+                    </p>
+                    <p class="text-gray-400 text-lg mb-4">
+                        Explore our range of:
+                        <ul class="list-disc list-inside ml-4 mt-2 text-gray-500">
+                            <li>Rings: From bold statement rings to intricate bands.</li>
+                            <li>Pendants: Iconic designs that symbolize rebellion and luxury.</li>
+                            <li>Bracelets: Cuffs, link bracelets, and beaded designs.</li>
+                            <li>Chains: Heavy gauge and delicate chains to complement any piece.</li>
+                        </ul>
+                    </p>
+                    <img src="https://i.pinimg.com/736x/c3/19/18/c319188e9fe6d5df601ab8aaab1592a9.jpg" alt="Silver Jewelry Detail" class="w-full h-96 object-cover rounded-lg shadow-md mt-6 mb-6 border chrome-hearts-border">
+                    <p class="text-gray-400 text-lg">
+                        Crafted for those who appreciate true artistry and a distinct edge.
+                    </p>
+                    <button onclick="showProductDetail('main-list')" class="mt-8 chrome-hearts-button hover:bg-gray-700 font-bold py-3 px-6 rounded-full shadow-lg transform transition-all duration-300 hover:scale-105">
+                        Back to Collections
+                    </button>
+                </section>
+            `,
+            'apparel-leather': `
+                <section class="chrome-hearts-bg-dark rounded-xl shadow-lg p-8 mb-8 border chrome-hearts-border fade-in-section">
+                    <h2 class="text-4xl font-extrabold chrome-hearts-text mb-6 text-center">Apparel & Leather Goods</h2>
+                    <p class="text-gray-400 text-lg mb-4">
+                        Chrome Hearts apparel and leather goods extend our signature aesthetic into wearable art. Made from premium materials, each item features unique graphics, silver hardware, and a fit that exudes effortless cool.
+                    </p>
+                    <p class="text-gray-400 text-lg mb-4">
+                        Discover:
+                        <ul class="list-disc list-inside ml-4 mt-2 text-gray-500">
+                            <li>Leather Jackets: Hand-distressed and adorned with custom silver details.</li>
+                            <li>Hoodies & T-shirts: Featuring exclusive graphic prints and iconic logos.</li>
+                            <li>Denim: Custom-fitted jeans with intricate patches and silver accents.</li>
+                            <li>Bags & Wallets: Crafted from exotic leathers with signature hardware.</li>
+                        </ul>
+                    </p>
+                    <img src="https://image-cdn.hypb.st/https%3A%2F%2Fhypebeast.com%2Fimage%2F2017%2F01%2Fchrome-hearts-x-dover-street-market-ginza-2017-collection-13.jpg?q=75&w=800&cbr=1&fit=max" alt="Apparel & Leather Detail" class="w-full h-96 object-cover rounded-lg shadow-md mt-6 mb-6 border chrome-hearts-border">
+                    <p class="text-gray-400 text-lg">
+                        Designed for comfort, durability, and undeniable style.
+                    </p>
+                    <button onclick="showProductDetail('main-list')" class="mt-8 chrome-hearts-button hover:bg-gray-700 font-bold py-3 px-6 rounded-full shadow-lg transform transition-all duration-300 hover:scale-105">
+                        Back to Collections
+                    </button>
+                </section>
+            `,
+            'eyewear-lifestyle': `
+                <section class="chrome-hearts-bg-dark rounded-xl shadow-lg p-8 mb-8 border chrome-hearts-border fade-in-section">
+                    <h2 class="text-4xl font-extrabold chrome-hearts-text mb-6 text-center">Eyewear & Lifestyle</h2>
+                    <p class="text-gray-400 text-lg mb-4">
+                        Our eyewear collection combines cutting-edge design with luxurious materials, featuring sterling silver, exotic woods, and premium acetate. Beyond eyewear, our lifestyle products bring the Chrome Hearts experience into your home.
+                    </p>
+                    <p class="text-gray-400 text-lg mb-4">
+                        Explore:
+                        <ul class="list-disc list-inside ml-4 mt-2 text-gray-500">
+                            <li>Eyeglasses & Sunglasses: Bold frames with signature silver accents.</li>
+                            <li>Home Goods: Unique furniture pieces, candles, and decor.</li>
+                            <li>Accessories: Keychains, lighters, and other small leather goods.</li>
+                            <li>Art & Collectibles: Limited edition items and collaborations.</li>
+                        </ul>
+                    </p>
+                    <img src="https://i.ytimg.com/vi/AVVK6B-uF64/maxresdefault.jpg" alt="Eyewear & Lifestyle Detail" class="w-full h-96 object-cover rounded-lg shadow-md mt-6 mb-6 border chrome-hearts-border">
+                    <p class="text-gray-400 text-lg">
+                        Elevate your everyday with pieces that are truly extraordinary.
+                    </p>
+                    <button onclick="showProductDetail('main-list')" class="mt-8 chrome-hearts-button hover:bg-gray-700 font-bold py-3 px-6 rounded-full shadow-lg transform transition-all duration-300 hover:scale-105">
+                        Back to Collections
+                    </button>
+                </section>
+            `
+        };
+
+        function showProductDetail(contentId) {
+            if (contentId === 'main-list') {
+                pageContent.innerHTML = `<section class="chrome-hearts-bg-dark rounded-xl shadow-lg p-8 mb-8 border chrome-hearts-border fade-in-section">
+                                            <h2 class="text-4xl font-extrabold chrome-hearts-text mb-8 text-center">Our Exclusive Collections</h2>
+                                            ${originalProductListHtml}
+                                        </section>`;
+            } else if (productDetails[contentId]) {
+                pageContent.innerHTML = productDetails[contentId];
+            } else {
+                pageContent.innerHTML = `<p class="text-red-600 text-center text-xl">Content not found!</p>`;
+            }
+            window.scrollTo(0, 0);
+            // Re-apply fade-in class after content is loaded
+            const newSection = document.querySelector('main section');
+            if (newSection) {
+                setTimeout(() => {
+                    newSection.classList.add('is-visible');
+                }, 50); // Small delay to ensure reflow before animation
+            }
+        }
+
+        // JavaScript to trigger fade-in animation on initial page load
+        document.addEventListener('DOMContentLoaded', () => {
+            const mainSection = document.querySelector('main section');
+            if (mainSection) {
+                mainSection.classList.add('is-visible');
+            }
+        });
+    </script>
+</body>
+</html>
