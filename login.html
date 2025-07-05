@@ -105,7 +105,8 @@
             const password = document.getElementById('password').value;
 
             if (username === 'user' && password === 'password') {
-                window.location.href = 'index.html';
+                localStorage.setItem('isLoggedIn', 'true'); // Set login flag
+                window.location.replace('index.html'); // Use replace for navigation
             } else {
                 loginError.classList.remove('hidden');
                 setTimeout(() => {

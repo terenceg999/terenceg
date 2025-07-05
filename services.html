@@ -256,11 +256,16 @@
             }
         }
 
-        // JavaScript to trigger fade-in animation on initial page load
+        // Check login status on page load
         document.addEventListener('DOMContentLoaded', () => {
-            const mainSection = document.querySelector('main section');
-            if (mainSection) {
-                mainSection.classList.add('is-visible');
+            if (localStorage.getItem('isLoggedIn') !== 'true') {
+                window.location.replace('login.html'); // Redirect to login if not logged in
+            } else {
+                // Trigger fade-in animation on initial page load
+                const mainSection = document.querySelector('main section');
+                if (mainSection) {
+                    mainSection.classList.add('is-visible');
+                }
             }
         });
     </script>
