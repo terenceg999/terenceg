@@ -87,14 +87,14 @@
     <nav class="bg-black shadow-lg py-4 px-6 md:px-10 sticky top-0 z-40">
         <div class="container mx-auto flex justify-between items-center relative">
             <!-- Left aligned logo (in black area) -->
-            <a href="unauthenticated.html" class="hover:opacity-80 transition duration-300 relative z-10">
+            <a href="unauthenticated.html" id="nav-logo-link" class="hover:opacity-80 transition duration-300 relative z-10">
                 <img src="https://www.shutterstock.com/image-vector/chrome-hearts-luxury-brand-renowned-600nw-2482182603.jpg" alt="Chrome Hearts Logo" class="h-8 w-auto">
             </a>
 
             <!-- Middle white section with emblem -->
             <div class="absolute inset-x-0 top-0 bottom-0 flex items-center justify-center">
                 <div class="bg-white h-full w-fit px-4 rounded-lg flex items-center justify-center">
-                    <a href="unauthenticated.html" class="hover:opacity-80 transition duration-300">
+                    <a href="unauthenticated.html" id="nav-emblem-link" class="hover:opacity-80 transition duration-300">
                         <img src="https://1000logos.net/wp-content/uploads/2024/12/Chrome-Hearts-Emblem.png" alt="Chrome Hearts Emblem Logo" class="h-24 w-auto">
                     </a>
                 </div>
@@ -135,12 +135,12 @@
                     </p>
                 </div>
             </div>
-            <div class="mt-6 text-center">
-                <a href="login.html" class="chrome-hearts-button hover:bg-gray-700 font-bold py-4 px-10 rounded-full shadow-lg transform transition-all duration-300 hover:scale-105 text-xl">
-                    Login to View Full Website
-                </a>
-            </div>
         </section>
+        <div class="mt-6 text-center">
+            <a href="login.html" class="chrome-hearts-button hover:bg-gray-700 font-bold py-4 px-10 rounded-full shadow-lg transform transition-all duration-300 hover:scale-105 text-xl">
+                Login to View Full Website
+            </a>
+        </div>
     </main>
 
     <footer>
@@ -167,6 +167,8 @@
             const navLogoutButton = document.getElementById('nav-logout-button');
             const navAboutLink = document.getElementById('nav-about-link');
             const navLoginLink = document.getElementById('nav-login-link');
+            const navLogoLink = document.getElementById('nav-logo-link');
+            const navEmblemLink = document.getElementById('nav-emblem-link');
 
             if (navHomeLink) {
                 navHomeLink.classList.toggle('hidden-by-default', !isLoggedIn);
@@ -183,6 +185,14 @@
             // About link is always visible
             if (navAboutLink) {
                 navAboutLink.classList.remove('hidden-by-default');
+            }
+
+            // Update logo links based on login status
+            if (navLogoLink) {
+                navLogoLink.href = isLoggedIn ? 'index.html' : 'unauthenticated.html';
+            }
+            if (navEmblemLink) {
+                navEmblemLink.href = isLoggedIn ? 'index.html' : 'unauthenticated.html';
             }
         }
 

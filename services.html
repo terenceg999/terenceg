@@ -87,14 +87,14 @@
     <nav class="bg-black shadow-lg py-4 px-6 md:px-10 sticky top-0 z-40">
         <div class="container mx-auto flex justify-between items-center relative">
             <!-- Left aligned logo (in black area) -->
-            <a href="index.html" class="hover:opacity-80 transition duration-300 relative z-10">
+            <a href="index.html" id="nav-logo-link" class="hover:opacity-80 transition duration-300 relative z-10">
                 <img src="https://www.shutterstock.com/image-vector/chrome-hearts-luxury-brand-renowned-600nw-2482182603.jpg" alt="Chrome Hearts Logo" class="h-8 w-auto">
             </a>
 
             <!-- Middle white section with emblem -->
             <div class="absolute inset-x-0 top-0 bottom-0 flex items-center justify-center">
                 <div class="bg-white h-full w-fit px-4 rounded-lg flex items-center justify-center">
-                    <a href="index.html" class="hover:opacity-80 transition duration-300">
+                    <a href="index.html" id="nav-emblem-link" class="hover:opacity-80 transition duration-300">
                         <img src="https://1000logos.net/wp-content/uploads/2024/12/Chrome-Hearts-Emblem.png" alt="Chrome Hearts Emblem Logo" class="h-24 w-auto">
                     </a>
                 </div>
@@ -122,7 +122,7 @@
                 <img src="https://i.pinimg.com/originals/3d/8c/7f/3d8c7f9f3c1b6a1e2f7e7d6b8b0e7c5e.jpg" alt="Chrome Hearts Legacy Image" class="w-full md:w-1/2 h-auto object-cover rounded-lg shadow-md border chrome-hearts-border">
                 <div class="flex-1 text-gray-400 leading-relaxed text-lg">
                     <p class="mb-4">
-                        Chrome Hearts collections are not just products; they are a testament to decades of rebellious artistry and unparalleled craftsmanship. Each piece, whether silver, leather, or apparel, carries the legacy of a brand that redefined luxury with an edge.
+                        Chrome Hearts collections are not just products; they are a testament to decades of rebellious artistry and unparalleled craftsmanship. Each piece, whether silver, leather, or apparel, carries the legacy of a brand that redefined luxury with an.
                     </p>
                     <p class="mb-4">
                         From the initial vision of Richard Stark to the global icon it is today, Chrome Hearts has consistently pushed boundaries, creating timeless designs that resonate with individuality and a spirit of defiance.
@@ -211,6 +211,8 @@
             const navLogoutButton = document.getElementById('nav-logout-button');
             const navAboutLink = document.getElementById('nav-about-link');
             const navLoginLink = document.getElementById('nav-login-link');
+            const navLogoLink = document.getElementById('nav-logo-link');
+            const navEmblemLink = document.getElementById('nav-emblem-link');
 
             if (navHomeLink) {
                 navHomeLink.classList.toggle('hidden-by-default', !isLoggedIn);
@@ -227,6 +229,14 @@
             // About link is always visible
             if (navAboutLink) {
                 navAboutLink.classList.remove('hidden-by-default');
+            }
+
+            // Update logo links based on login status
+            if (navLogoLink) {
+                navLogoLink.href = isLoggedIn ? 'index.html' : 'unauthenticated.html';
+            }
+            if (navEmblemLink) {
+                navEmblemLink.href = isLoggedIn ? 'index.html' : 'unauthenticated.html';
             }
         }
 
@@ -282,6 +292,10 @@
             'eyewear-lifestyle': `
                 <section class="chrome-hearts-bg-dark rounded-xl shadow-lg p-8 mb-8 border chrome-hearts-border fade-in-section">
                     <h2 class="text-4xl font-extrabold chrome-hearts-text mb-6 text-center">Eyewear & Lifestyle</h2>
+                    <p class="text-gray-400 text-lg mb-4">
+                        Our eyewear collection combines cutting-edge design with luxurious materials, featuring sterling silver, exotic woods, and premium acetate. Beyond eyewear, our lifestyle products bring the Chrome Hearts experience into your home.
+                    </p>
+                    <p class="text-4xl font-extrabold chrome-hearts-text mb-6 text-center">Eyewear & Lifestyle</h2>
                     <p class="text-gray-400 text-lg mb-4">
                         Our eyewear collection combines cutting-edge design with luxurious materials, featuring sterling silver, exotic woods, and premium acetate. Beyond eyewear, our lifestyle products bring the Chrome Hearts experience into your home.
                     </p>

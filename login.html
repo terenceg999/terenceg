@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Chrome Hearts</title>
+    <title>Login / Create Account - Chrome Hearts</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&display=swap" rel="stylesheet">
@@ -70,6 +70,20 @@
         .hidden-by-default {
             display: none;
         }
+        .tab-button {
+            padding: 0.75rem 1.5rem;
+            border-bottom: 2px solid transparent;
+            color: #a0a0a0;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        .tab-button.active {
+            border-color: #c0c0c0;
+            color: #e0e0e0;
+        }
+        .tab-button:hover:not(.active) {
+            color: #c0c0c0;
+        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col">
@@ -77,14 +91,14 @@
     <nav class="bg-black shadow-lg py-4 px-6 md:px-10 sticky top-0 z-40">
         <div class="container mx-auto flex justify-between items-center relative">
             <!-- Left aligned logo (in black area) -->
-            <a href="unauthenticated.html" class="hover:opacity-80 transition duration-300 relative z-10">
+            <a href="unauthenticated.html" id="nav-logo-link" class="hover:opacity-80 transition duration-300 relative z-10">
                 <img src="https://www.shutterstock.com/image-vector/chrome-hearts-luxury-brand-renowned-600nw-2482182603.jpg" alt="Chrome Hearts Logo" class="h-8 w-auto">
             </a>
 
             <!-- Middle white section with emblem -->
             <div class="absolute inset-x-0 top-0 bottom-0 flex items-center justify-center">
                 <div class="bg-white h-full w-fit px-4 rounded-lg flex items-center justify-center">
-                    <a href="unauthenticated.html" class="hover:opacity-80 transition duration-300">
+                    <a href="unauthenticated.html" id="nav-emblem-link" class="hover:opacity-80 transition duration-300">
                         <img src="https://1000logos.net/wp-content/uploads/2024/12/Chrome-Hearts-Emblem.png" alt="Chrome Hearts Emblem Logo" class="h-24 w-auto">
                     </a>
                 </div>
@@ -97,7 +111,7 @@
                 <button onclick="logout()" id="nav-logout-button" class="ml-4 bg-red-700 hover:bg-red-800 text-white font-bold py-2 px-4 rounded-full shadow-md transition duration-300 text-sm hidden-by-default">
                     Logout
                 </button>
-                <a href="login.html" id="nav-login-link" class="ml-4 chrome-hearts-button hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-full shadow-md transition duration-300 text-sm hidden-by-default">
+                <a href="login.html" id="nav-login-link" class="ml-4 chrome-hearts-button hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-full shadow-md transition duration-300 text-sm">
                     Login
                 </a>
             </div>
@@ -106,25 +120,71 @@
 
     <div class="min-h-screen flex items-center justify-center p-4">
         <div class="chrome-hearts-bg-dark p-8 rounded-xl shadow-2xl w-full max-w-md transform transition-all duration-300 hover:scale-105 border chrome-hearts-border">
-            <h2 class="text-4xl font-extrabold text-center chrome-hearts-text mb-8">Enter the Realm</h2>
-            <form id="login-form" class="space-y-6">
-                <div>
-                    <label for="username" class="block text-sm font-medium text-gray-400 mb-2">Username</label>
-                    <input type="text" id="username" name="username" required
-                           class="mt-1 block w-full px-4 py-3 border border-gray-600 rounded-lg shadow-sm focus:ring-gray-700 focus:border-gray-700 sm:text-base transition duration-200 bg-gray-800 text-white placeholder-gray-500">
-                </div>
-                <div>
-                    <label for="password" class="block text-sm font-medium text-gray-400 mb-2">Password</label>
-                    <input type="password" id="password" name="password" required
-                           class="mt-1 block w-full px-4 py-3 border border-gray-600 rounded-lg shadow-sm focus:ring-gray-700 focus:border-gray-700 sm:text-base transition duration-200 bg-gray-800 text-white placeholder-gray-500">
-                </div>
-                <button type="submit"
-                        class="w-full chrome-hearts-button py-3 px-4 rounded-lg shadow-lg hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600 focus:ring-offset-2 text-lg font-semibold transform transition-transform duration-200 active:scale-95">
-                    Unleash
-                </button>
-                <p id="login-error" class="text-red-600 text-center text-sm mt-4 hidden">Access Denied. Incorrect credentials.</p>
-            </form>
-            <p class="text-center text-gray-500 text-sm mt-6">Hint: username is 'user', password is 'password'</p>
+            <div class="flex justify-center mb-6">
+                <button id="login-tab" class="tab-button active">LOGIN</button>
+                <button id="create-account-tab" class="tab-button">CREATE ACCOUNT</button>
+            </div>
+
+            <div id="login-content">
+                <h2 class="text-4xl font-extrabold text-center chrome-hearts-text mb-8">Enter the Realm</h2>
+                <form id="login-form" class="space-y-6">
+                    <div>
+                        <label for="username" class="block text-sm font-medium text-gray-400 mb-2">Username</label>
+                        <input type="text" id="username" name="username" required
+                               class="mt-1 block w-full px-4 py-3 border border-gray-600 rounded-lg shadow-sm focus:ring-gray-700 focus:border-gray-700 sm:text-base transition duration-200 bg-gray-800 text-white placeholder-gray-500">
+                    </div>
+                    <div>
+                        <label for="password" class="block text-sm font-medium text-gray-400 mb-2">Password</label>
+                        <input type="password" id="password" name="password" required
+                               class="mt-1 block w-full px-4 py-3 border border-gray-600 rounded-lg shadow-sm focus:ring-gray-700 focus:border-gray-700 sm:text-base transition duration-200 bg-gray-800 text-white placeholder-gray-500">
+                    </div>
+                    <button type="submit"
+                            class="w-full chrome-hearts-button py-3 px-4 rounded-lg shadow-lg hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600 focus:ring-offset-2 text-lg font-semibold transform transition-transform duration-200 active:scale-95">
+                        Unleash
+                    </button>
+                    <p id="login-error" class="text-red-600 text-center text-sm mt-4 hidden">Invalid credentials. Please try again.</p>
+                </form>
+                <p class="text-center text-gray-500 text-sm mt-6">Hint: Any username and password will work.</p>
+            </div>
+
+            <div id="create-account-content" class="hidden">
+                <h2 class="text-4xl font-extrabold text-center chrome-hearts-text mb-8">Forge Your Path</h2>
+                <form id="create-account-form" class="space-y-6">
+                    <div>
+                        <label for="first-name" class="block text-sm font-medium text-gray-400 mb-2">* First Name</label>
+                        <input type="text" id="first-name" name="first-name" required
+                               class="mt-1 block w-full px-4 py-3 border border-gray-600 rounded-lg shadow-sm focus:ring-gray-700 focus:border-gray-700 sm:text-base transition duration-200 bg-gray-800 text-white placeholder-gray-500">
+                    </div>
+                    <div>
+                        <label for="last-name" class="block text-sm font-medium text-gray-400 mb-2">* Last Name</label>
+                        <input type="text" id="last-name" name="last-name" required
+                               class="mt-1 block w-full px-4 py-3 border border-gray-600 rounded-lg shadow-sm focus:ring-gray-700 focus:border-gray-700 sm:text-base transition duration-200 bg-gray-800 text-white placeholder-gray-500">
+                    </div>
+                    <div>
+                        <label for="phone-number" class="block text-sm font-medium text-gray-400 mb-2">* Phone Number</label>
+                        <input type="tel" id="phone-number" name="phone-number" required
+                               class="mt-1 block w-full px-4 py-3 border border-gray-600 rounded-lg shadow-sm focus:ring-gray-700 focus:border-gray-700 sm:text-base transition duration-200 bg-gray-800 text-white placeholder-gray-500">
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-400 mb-2">* Email</label>
+                        <input type="email" id="email" name="email" required
+                               class="mt-1 block w-full px-4 py-3 border border-gray-600 rounded-lg shadow-sm focus:ring-gray-700 focus:border-gray-700 sm:text-base transition duration-200 bg-gray-800 text-white placeholder-gray-500">
+                    </div>
+                    <div>
+                        <label for="new-password" class="block text-sm font-medium text-gray-400 mb-2">* Password</label>
+                        <input type="password" id="new-password" name="new-password" required
+                               class="mt-1 block w-full px-4 py-3 border border-gray-600 rounded-lg shadow-sm focus:ring-gray-700 focus:border-gray-700 sm:text-base transition duration-200 bg-gray-800 text-white placeholder-gray-500">
+                    </div>
+                    <button type="submit"
+                            class="w-full chrome-hearts-button py-3 px-4 rounded-lg shadow-lg hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600 focus:ring-offset-2 text-lg font-semibold transform transition-transform duration-200 active:scale-95">
+                        CREATE ACCOUNT
+                    </button>
+                    <p class="text-center text-gray-500 text-sm mt-6">
+                        By clicking Create Account, I agree to the <a href="#" class="underline hover:text-white">Terms of Use</a>, and I have read the <a href="#" class="underline hover:text-white">Privacy Policy</a>.
+                    </p>
+                    <p id="create-account-error" class="text-red-600 text-center text-sm mt-4 hidden">Please fill in all fields.</p>
+                </form>
+            </div>
         </div>
     </div>
 
@@ -152,6 +212,8 @@
             const navLogoutButton = document.getElementById('nav-logout-button');
             const navAboutLink = document.getElementById('nav-about-link');
             const navLoginLink = document.getElementById('nav-login-link');
+            const navLogoLink = document.getElementById('nav-logo-link');
+            const navEmblemLink = document.getElementById('nav-emblem-link');
 
             if (navHomeLink) {
                 navHomeLink.classList.toggle('hidden-by-default', !isLoggedIn);
@@ -170,24 +232,75 @@
             if (navAboutLink) {
                 navAboutLink.classList.remove('hidden-by-default');
             }
+
+            // Update logo links based on login status
+            if (navLogoLink) {
+                navLogoLink.href = isLoggedIn ? 'index.html' : 'unauthenticated.html';
+            }
+            if (navEmblemLink) {
+                navEmblemLink.href = isLoggedIn ? 'index.html' : 'unauthenticated.html';
+            }
         }
 
         const loginForm = document.getElementById('login-form');
         const loginError = document.getElementById('login-error');
+        const loginTab = document.getElementById('login-tab');
+        const createAccountTab = document.getElementById('create-account-tab');
+        const loginContent = document.getElementById('login-content');
+        const createAccountContent = document.getElementById('create-account-content');
+        const createAccountForm = document.getElementById('create-account-form');
+        const createAccountError = document.getElementById('create-account-error');
+
+
+        // Function to show/hide tabs
+        function showTab(tabId) {
+            if (tabId === 'login') {
+                loginTab.classList.add('active');
+                createAccountTab.classList.remove('active');
+                loginContent.classList.remove('hidden');
+                createAccountContent.classList.add('hidden');
+                loginError.classList.add('hidden'); // Hide login error when switching tabs
+                createAccountError.classList.add('hidden'); // Hide create account error
+            } else if (tabId === 'create-account') {
+                createAccountTab.classList.add('active');
+                loginTab.classList.remove('active');
+                createAccountContent.classList.remove('hidden');
+                loginContent.classList.add('hidden');
+                loginError.classList.add('hidden'); // Hide login error when switching tabs
+                createAccountError.classList.add('hidden'); // Hide create account error
+            }
+        }
+
+        // Event listeners for tabs
+        loginTab.addEventListener('click', () => showTab('login'));
+        createAccountTab.addEventListener('click', () => showTab('create-account'));
 
         loginForm.addEventListener('submit', function(event) {
-            event.preventDefault();
+            event.preventDefault(); // Prevent default form submission behavior
 
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
+            // In this "illusion" setup, any username and password works
+            localStorage.setItem('isLoggedIn', 'true'); // Set login flag to true
+            window.location.replace('index.html'); // Redirect to index.html
+        });
 
-            if (username === 'user' && password === 'password') {
-                localStorage.setItem('isLoggedIn', 'true'); // Set login flag
-                window.location.replace('index.html'); // Use replace for navigation
+        createAccountForm.addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission behavior
+
+            const firstName = document.getElementById('first-name').value;
+            const lastName = document.getElementById('last-name').value;
+            const phoneNumber = document.getElementById('phone-number').value;
+            const email = document.getElementById('email').value;
+            const newPassword = document.getElementById('new-password').value;
+
+            if (firstName && lastName && phoneNumber && email && newPassword) {
+                // If all fields are filled, simulate successful account creation
+                // Since any login works, we just redirect to login page
+                localStorage.setItem('isLoggedIn', 'true'); // Log them in immediately after "creation"
+                window.location.replace('index.html'); // Redirect to index.html
             } else {
-                loginError.classList.remove('hidden');
+                createAccountError.classList.remove('hidden');
                 setTimeout(() => {
-                    loginError.classList.add('hidden');
+                    createAccountError.classList.add('hidden');
                 }, 3000);
             }
         });
