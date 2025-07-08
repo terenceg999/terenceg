@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Chrome Hearts</title>
+    <title>Chrome Hearts - About</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&display=swap" rel="stylesheet">
@@ -66,6 +66,16 @@
             background-color: #5a5a5a;
             border-color: #888;
         }
+        /* New CSS for fade-in animation */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
         /* Hidden by default, shown by JS */
         .hidden-by-default {
             display: none;
@@ -97,36 +107,41 @@
                 <button onclick="logout()" id="nav-logout-button" class="ml-4 bg-red-700 hover:bg-red-800 text-white font-bold py-2 px-4 rounded-full shadow-md transition duration-300 text-sm hidden-by-default">
                     Logout
                 </button>
-                <a href="login.html" id="nav-login-link" class="ml-4 chrome-hearts-button hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-full shadow-md transition duration-300 text-sm hidden-by-default">
+                <a href="login.html" id="nav-login-link" class="ml-4 chrome-hearts-button hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-full shadow-md transition duration-300 text-sm">
                     Login
                 </a>
             </div>
         </div>
     </nav>
 
-    <div class="min-h-screen flex items-center justify-center p-4">
-        <div class="chrome-hearts-bg-dark p-8 rounded-xl shadow-2xl w-full max-w-md transform transition-all duration-300 hover:scale-105 border chrome-hearts-border">
-            <h2 class="text-4xl font-extrabold text-center chrome-hearts-text mb-8">Enter the Realm</h2>
-            <form id="login-form" class="space-y-6">
-                <div>
-                    <label for="username" class="block text-sm font-medium text-gray-400 mb-2">Username</label>
-                    <input type="text" id="username" name="username" required
-                           class="mt-1 block w-full px-4 py-3 border border-gray-600 rounded-lg shadow-sm focus:ring-gray-700 focus:border-gray-700 sm:text-base transition duration-200 bg-gray-800 text-white placeholder-gray-500">
+    <main class="flex-1 p-6 md:p-10">
+        <section class="chrome-hearts-bg-dark rounded-xl shadow-lg p-8 mb-8 border chrome-hearts-border fade-in-section">
+            <h2 class="text-4xl font-extrabold chrome-hearts-text mb-6 text-center">The Chrome Hearts Legacy</h2>
+            <div class="flex flex-col md:flex-row items-center md:items-start gap-8">
+                <img src="https://1000logos.net/wp-content/uploads/2024/12/Chrome-Hearts-Logo.png" alt="Chrome Hearts Official Logo" class="w-48 h-48 md:w-64 md:h-64 rounded-full object-cover shadow-xl border-4 chrome-hearts-border bg-white p-2">
+                <div class="flex-1 text-gray-400 leading-relaxed text-lg">
+                    <p class="mb-4">
+                        Hello! Welcome to Chrome Hearts. This is a brief overview of our legacy.
+                        Founded in 1988 by Richard Stark, Chrome Hearts began as a vision to create the perfect leather riding jacket. What emerged was a revolutionary brand that defied conventional luxury, blending rock 'n' roll rebellion with unparalleled craftsmanship in sterling silver, leather, and fine woods.
+                    </p>
+                    <p class="mb-4">
+                        From its humble beginnings in a Los Angeles garage, Chrome Hearts rapidly gained a cult following among musicians, celebrities, and fashion connoisseurs. Each piece is meticulously handcrafted, embodying a philosophy of uncompromising quality and unique design that stands the test of time.
+                    </p>
+                    <p class="mb-4">
+                        What truly isolates Chrome Hearts from the competition is its dedication to authenticity and exclusivity. We don't follow trends; we set them. Our designs are not mass-produced; they are individual works of art, imbued with a spirit of individuality and a rebellious edge that resonates with those who forge their own path. This commitment to genuine artistry and a distinct identity ensures that every Chrome Hearts item is not just a product, but a statement.
+                    </p>
+                    <p>
+                        We invite you to delve deeper into the world where luxury meets rebellion, and craftsmanship reigns supreme.
+                    </p>
                 </div>
-                <div>
-                    <label for="password" class="block text-sm font-medium text-gray-400 mb-2">Password</label>
-                    <input type="password" id="password" name="password" required
-                           class="mt-1 block w-full px-4 py-3 border border-gray-600 rounded-lg shadow-sm focus:ring-gray-700 focus:border-gray-700 sm:text-base transition duration-200 bg-gray-800 text-white placeholder-gray-500">
-                </div>
-                <button type="submit"
-                        class="w-full chrome-hearts-button py-3 px-4 rounded-lg shadow-lg hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600 focus:ring-offset-2 text-lg font-semibold transform transition-transform duration-200 active:scale-95">
-                    Unleash
-                </button>
-                <p id="login-error" class="text-red-600 text-center text-sm mt-4 hidden">Access Denied. Incorrect credentials.</p>
-            </form>
-            <p class="text-center text-gray-500 text-sm mt-6">Hint: username is 'user', password is 'password'</p>
-        </div>
-    </div>
+            </div>
+            <div class="mt-6 text-center">
+                <a href="login.html" class="chrome-hearts-button hover:bg-gray-700 font-bold py-4 px-10 rounded-full shadow-lg transform transition-all duration-300 hover:scale-105 text-xl">
+                    Login to View Full Website
+                </a>
+            </div>
+        </section>
+    </main>
 
     <footer>
         <div class="bg-black text-white py-6 mt-auto">
@@ -162,9 +177,8 @@
             if (navLogoutButton) {
                 navLogoutButton.classList.toggle('hidden-by-default', !isLoggedIn);
             }
-            // On the login page, the login link in the nav should always be hidden
             if (navLoginLink) {
-                navLoginLink.classList.add('hidden-by-default');
+                navLoginLink.classList.toggle('hidden-by-default', isLoggedIn);
             }
             // About link is always visible
             if (navAboutLink) {
@@ -172,28 +186,16 @@
             }
         }
 
-        const loginForm = document.getElementById('login-form');
-        const loginError = document.getElementById('login-error');
+        // Check login status on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            updateNavVisibility(); // Update nav bar immediately
 
-        loginForm.addEventListener('submit', function(event) {
-            event.preventDefault();
-
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-
-            if (username === 'user' && password === 'password') {
-                localStorage.setItem('isLoggedIn', 'true'); // Set login flag
-                window.location.replace('index.html'); // Use replace for navigation
-            } else {
-                loginError.classList.remove('hidden');
-                setTimeout(() => {
-                    loginError.classList.add('hidden');
-                }, 3000);
+            // Trigger fade-in animation for the main content section
+            const mainSection = document.querySelector('main section');
+            if (mainSection) {
+                mainSection.classList.add('is-visible');
             }
         });
-
-        // Update nav visibility on page load
-        document.addEventListener('DOMContentLoaded', updateNavVisibility);
     </script>
 </body>
 </html>

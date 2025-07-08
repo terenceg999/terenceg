@@ -76,32 +76,41 @@
             opacity: 1;
             transform: translateY(0);
         }
+        /* Hidden by default, shown by JS */
+        .hidden-by-default {
+            display: none;
+        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col">
 
     <nav class="bg-black shadow-lg py-4 px-6 md:px-10 sticky top-0 z-40">
-        <div class="container mx-auto flex justify-between items-center">
-            <!-- Left aligned logo -->
-            <a href="index.html" class="hover:opacity-80 transition duration-300">
+        <div class="container mx-auto flex justify-between items-center relative">
+            <!-- Left aligned logo (in black area) -->
+            <a href="index.html" class="hover:opacity-80 transition duration-300 relative z-10">
                 <img src="https://www.shutterstock.com/image-vector/chrome-hearts-luxury-brand-renowned-600nw-2482182603.jpg" alt="Chrome Hearts Logo" class="h-8 w-auto">
             </a>
 
-            <!-- Centered Emblem -->
-            <div class="absolute left-1/2 transform -translate-x-1/2">
-                <a href="index.html" class="hover:opacity-80 transition duration-300">
-                    <img src="https://1000logos.net/wp-content/uploads/2024/12/Chrome-Hearts-Emblem.png" alt="Chrome Hearts Emblem Logo" class="h-8 w-auto">
-                </a>
+            <!-- Middle white section with emblem -->
+            <div class="absolute inset-x-0 top-0 bottom-0 flex items-center justify-center">
+                <div class="bg-white h-full w-fit px-4 rounded-lg flex items-center justify-center">
+                    <a href="index.html" class="hover:opacity-80 transition duration-300">
+                        <img src="https://1000logos.net/wp-content/uploads/2024/12/Chrome-Hearts-Emblem.png" alt="Chrome Hearts Emblem Logo" class="h-24 w-auto">
+                    </a>
+                </div>
             </div>
 
-            <!-- Right aligned navigation links and logout button -->
-            <div class="flex space-x-6 items-center ml-auto">
-                <a href="index.html" class="text-gray-400 hover:text-white px-3 py-2 rounded-lg text-lg font-medium transition duration-300">Home</a>
-                <a href="about.html" class="text-gray-400 hover:text-white px-3 py-2 rounded-lg text-lg font-medium transition duration-300">About</a>
-                <a href="services.html" class="text-gray-400 hover:text-white px-3 py-2 rounded-lg text-lg font-medium transition duration-300">Collections</a>
-                <button onclick="logout()" class="ml-4 bg-red-700 hover:bg-red-800 text-white font-bold py-2 px-4 rounded-full shadow-md transition duration-300">
+            <!-- Right aligned navigation links and logout button (in black area) -->
+            <div class="flex space-x-4 items-center ml-auto relative z-10">
+                <a href="index.html" id="nav-home-link" class="text-gray-400 hover:text-white px-3 py-2 rounded-lg text-base font-medium transition duration-300">Home</a>
+                <a href="about.html" id="nav-about-link" class="text-gray-400 hover:text-white px-3 py-2 rounded-lg text-base font-medium transition duration-300">About</a>
+                <a href="services.html" id="nav-collections-link" class="text-gray-400 hover:text-white px-3 py-2 rounded-lg text-base font-medium transition duration-300">Collections</a>
+                <button onclick="logout()" id="nav-logout-button" class="ml-4 bg-red-700 hover:bg-red-800 text-white font-bold py-2 px-4 rounded-full shadow-md transition duration-300 text-sm">
                     Logout
                 </button>
+                <a href="login.html" id="nav-login-link" class="ml-4 chrome-hearts-button hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-full shadow-md transition duration-300 text-sm hidden-by-default">
+                    Login
+                </a>
             </div>
         </div>
     </nav>
@@ -151,16 +160,48 @@
     </footer>
 
     <script>
-        // Function to handle logout
+        // Function to handle logout (redirects to login, which then goes to unauthenticated)
         function logout() {
             localStorage.removeItem('isLoggedIn'); // Clear login flag
-            window.location.replace('login.html'); // Use replace for navigation
+            window.location.replace('login.html'); // Redirect to login, which will then go to unauthenticated
         }
+
+        // Function to update navigation link visibility based on login status
+        function updateNavVisibility() {
+            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+
+            const navHomeLink = document.getElementById('nav-home-link');
+            const navCollectionsLink = document.getElementById('nav-collections-link');
+            const navLogoutButton = document.getElementById('nav-logout-button');
+            const navAboutLink = document.getElementById('nav-about-link');
+            const navLoginLink = document.getElementById('nav-login-link');
+
+            if (navHomeLink) {
+                navHomeLink.classList.toggle('hidden-by-default', !isLoggedIn);
+            }
+            if (navCollectionsLink) {
+                navCollectionsLink.classList.toggle('hidden-by-default', !isLoggedIn);
+            }
+            if (navLogoutButton) {
+                navLogoutButton.classList.toggle('hidden-by-default', !isLoggedIn);
+            }
+            if (navLoginLink) {
+                navLoginLink.classList.toggle('hidden-by-default', isLoggedIn);
+            }
+            // About link is always visible
+            if (navAboutLink) {
+                navAboutLink.classList.remove('hidden-by-default');
+            }
+        }
+
 
         // Check login status on page load
         document.addEventListener('DOMContentLoaded', () => {
+            updateNavVisibility(); // Update nav bar immediately
+
+            // If not logged in, redirect to unauthenticated.html
             if (localStorage.getItem('isLoggedIn') !== 'true') {
-                window.location.replace('login.html'); // Redirect to login if not logged in
+                window.location.replace('unauthenticated.html');
             } else {
                 // Trigger fade-in animation for the main content section
                 const mainSection = document.querySelector('main section');
