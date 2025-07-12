@@ -14,28 +14,21 @@
             color: #e0e0e0;
             position: relative;
             z-index: 1;
-            overflow: hidden; /* Prevent body scrollbar due to video */
         }
-        #background-video {
-            position: fixed;
-            right: 0;
-            bottom: 0;
-            min-width: 100%;
-            min-height: 100%;
-            width: auto;
-            height: auto;
-            z-index: -2; /* Behind the content and overlay */
-            background-size: cover;
-            filter: blur(2px); /* Apply blur directly to the video */
-        }
-        .video-overlay {
+        body::before {
+            content: '';
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.3); /* Dark overlay for better text readability */
-            z-index: -1; /* Between video and content */
+            background-image: url('https://wallpapers.com/images/hd/chrome-hearts-club-be0b195uxic2r0b4.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            filter: blur(2px);
+            z-index: -1;
+            opacity: 0.7;
         }
         ::-webkit-scrollbar {
             width: 8px;
@@ -94,14 +87,6 @@
     </style>
 </head>
 <body class="min-h-screen flex flex-col">
-
-    <!-- Background Video -->
-    <video autoplay loop muted playsinline id="background-video">
-        <source src="src="chromehearts_.mp4">
-        Your browser does not support the video tag.
-    </video>
-    <!-- Video Overlay -->
-    <div class="video-overlay"></div>
 
     <nav class="bg-black shadow-lg py-4 px-6 md:px-10 sticky top-0 z-40">
         <div class="container mx-auto flex justify-between items-center relative">
@@ -214,6 +199,7 @@
     <script>
         // Function to handle logout (redirects to login, which then goes to unauthenticated)
         function logout() {
+            console.log('Logging out...');
             localStorage.removeItem('isLoggedIn'); // Clear login flag
             window.location.replace('login.html'); // Redirect to login, which will then go to unauthenticated
         }
@@ -221,6 +207,7 @@
         // Function to update navigation link visibility based on login status
         function updateNavVisibility() {
             const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+            console.log('Nav visibility check: isLoggedIn =', isLoggedIn);
 
             const navHomeLink = document.getElementById('nav-home-link');
             const navCollectionsLink = document.getElementById('nav-collections-link');
@@ -269,6 +256,7 @@
 
         // Function to show/hide tabs
         function showTab(tabId) {
+            console.log('Showing tab:', tabId);
             if (tabId === 'login') {
                 loginTab.classList.add('active');
                 createAccountTab.classList.remove('active');
@@ -292,14 +280,18 @@
 
         loginForm.addEventListener('submit', function(event) {
             event.preventDefault(); // Prevent default form submission behavior
+            console.log('Login form submitted.');
 
             // In this "illusion" setup, any username and password works
             localStorage.setItem('isLoggedIn', 'true'); // Set login flag to true
+            console.log('isLoggedIn set to true in localStorage.');
             window.location.replace('index.html'); // Redirect to index.html
+            console.log('Redirecting to index.html...');
         });
 
         createAccountForm.addEventListener('submit', function(event) {
             event.preventDefault(); // Prevent default form submission behavior
+            console.log('Create account form submitted.');
 
             const firstName = document.getElementById('first-name').value;
             const lastName = document.getElementById('last-name').value;
@@ -308,11 +300,13 @@
             const newPassword = document.getElementById('new-password').value;
 
             if (firstName && lastName && phoneNumber && email && newPassword) {
-                // If all fields are filled, simulate successful account creation
-                // Since any login works, we just redirect to login page
+                console.log('All create account fields filled. Simulating account creation and login.');
                 localStorage.setItem('isLoggedIn', 'true'); // Log them in immediately after "creation"
+                console.log('isLoggedIn set to true in localStorage after create account.');
                 window.location.replace('index.html'); // Redirect to index.html
+                console.log('Redirecting to index.html...');
             } else {
+                console.log('Create account fields missing. Showing error.');
                 createAccountError.classList.remove('hidden');
                 setTimeout(() => {
                     createAccountError.classList.add('hidden');
@@ -321,7 +315,10 @@
         });
 
         // Update nav visibility on page load
-        document.addEventListener('DOMContentLoaded', updateNavVisibility);
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('DOM Content Loaded. Initializing nav visibility and checking login status.');
+            updateNavVisibility(); // Update nav bar immediately
+        });
     </script>
 </body>
 </html>
